@@ -62,8 +62,6 @@ a {
     --brand-700: #1f3d22;
     --brand-800: #152b17;
     --brand-900: #0d1a0e;
-    --shopee: #ee4d2d;
-    --tiktok: #010101;
     --white: #ffffff;
     --stone-50: #fafaf9;
     --stone-100: #f5f5f4;
@@ -75,79 +73,17 @@ a {
     --stone-700: #44403c;
     --stone-800: #292524;
     --stone-900: #1c1917;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
-    --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.12);
-    --shadow-custom: 0 4px 12px rgba(0, 0, 0, 0.20);
-    --radius-lg: 32px;
-    --radius-xl: 40px;
     --radius-full: 9999px;
     --navbar-height: 72px;
 }
 
-/* ===== UTILITY ===== */
-.hidden {
-    display: none !important;
-}
-
-.section-label {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brand-500);
-}
-
-.section-label-light {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brand-200);
-}
-
-.section-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: var(--stone-900);
-    margin-top: 0.5rem;
-}
-
-.section-title-light {
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: var(--white);
-    margin-top: 0.5rem;
-}
-
-.section-subtitle {
-    color: var(--stone-500);
-    margin-top: 0.75rem;
-}
-
-.section-subtitle-light {
-    color: var(--brand-100);
-    margin-top: 0.75rem;
-}
-
-.section-header-light {
-    text-align: center;
-    max-width: 42rem;
-    margin: 0 auto 56px;
-}
-
 /* ===== NAVBAR - BACKGROUND BURAM SAJA ===== */
-/* State untuk background buram (tanpa efek layout) */
 .navbar.scrolled-bg {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.06);
 }
 
-/* State untuk background buram di section gelap */
 .navbar.scrolled-bg.dark-bg {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
@@ -155,7 +91,6 @@ a {
 }
 
 /* ===== NAVBAR - MODE SCROLLED LENGKAP ===== */
-/* State saat scrolled (background + layout berubah) */
 .navbar.scrolled {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
@@ -182,7 +117,6 @@ a {
     overflow: visible;
 }
 
-/* State saat di-scroll - background transparan dengan blur */
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -194,14 +128,13 @@ a {
     position: relative;
 }
 
-/* ===== LOGO - Dengan transformasi JS ===== */
+/* ===== LOGO ===== */
 .navbar-logo {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
     z-index: 2;
-    /* Posisi awal di kiri */
     transform: translateX(0);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -212,17 +145,15 @@ a {
     transition: filter 0.3s ease;
 }
 
-/* Saat navbar transparan (di awal), logo dengan filter */
 .navbar:not(.scrolled) .navbar-logo img {
     filter: brightness(0) saturate(1);
 }
 
-/* Saat navbar scrolled, logo normal */
 .navbar.scrolled .navbar-logo img {
     filter: none;
 }
 
-/* ===== DESKTOP MENU - SLIDE OUT KE KANAN ===== */
+/* ===== DESKTOP MENU ===== */
 .navbar-menu {
     display: flex;
     align-items: center;
@@ -230,8 +161,6 @@ a {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     margin-left: auto;
-
-    /* Initial state - visible */
     transform: translateX(0);
     opacity: 1;
     pointer-events: auto;
@@ -239,7 +168,6 @@ a {
     right: auto;
 }
 
-/* Saat scrolled, menu slide ke kanan dan menghilang */
 .navbar.scrolled .navbar-menu {
     transform: translateX(120%);
     opacity: 0;
@@ -277,12 +205,10 @@ a {
     width: 100%;
 }
 
-/* Saat navbar transparan (di awal), link berwarna gelap agar terlihat */
 .navbar:not(.scrolled) .navbar-link {
     color: var(--stone-800);
 }
 
-/* Saat navbar scrolled, link normal */
 .navbar.scrolled .navbar-link {
     color: var(--stone-700);
 }
@@ -312,7 +238,6 @@ a {
     margin-right: 6px;
 }
 
-/* Saat navbar transparan (di awal), highlight tetap sama */
 .navbar:not(.scrolled) .navbar-link-highlight {
     background: var(--brand-600);
     color: var(--white) !important;
@@ -323,7 +248,139 @@ a {
     color: var(--white) !important;
 }
 
-/* ===== MOBILE TOGGLE ===== */
+/* ===== NAVBAR MOBILE DROPDOWN - ELEGAN ===== */
+.navbar-dropdown {
+    position: fixed;
+    top: var(--navbar-height);
+    right: 0;
+    width: 0;
+    max-width: 320px;
+    height: calc(100vh - var(--navbar-height));
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 0 0 0 20px;
+}
+
+.navbar-dropdown.open {
+    width: 100%;
+    max-width: 320px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.navbar-dropdown-inner {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.15s;
+}
+
+.navbar-dropdown.open .navbar-dropdown-inner {
+    opacity: 1;
+}
+
+.navbar-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--stone-600);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    transform: translateX(40px);
+    opacity: 0;
+    border-radius: 12px;
+    margin: 0 12px;
+}
+
+.navbar-dropdown.open .navbar-dropdown-link {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Delay untuk setiap item */
+.navbar-dropdown.open .navbar-dropdown-link:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.navbar-dropdown.open .navbar-dropdown-link:nth-child(2) {
+    transition-delay: 0.10s;
+}
+
+.navbar-dropdown.open .navbar-dropdown-link:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.navbar-dropdown.open .navbar-dropdown-link:nth-child(4) {
+    transition-delay: 0.20s;
+}
+
+.navbar-dropdown-link i {
+    width: 22px;
+    font-size: 1rem;
+    color: var(--brand-400);
+    transition: all 0.3s ease;
+}
+
+.navbar-dropdown-link:hover {
+    background: var(--brand-50);
+    color: var(--brand-600);
+    transform: translateX(6px) !important;
+}
+
+.navbar-dropdown-link:hover i {
+    color: var(--brand-500);
+    transform: scale(1.1);
+}
+
+/* Highlight (Get in Touch) */
+.navbar-dropdown-highlight {
+    background: var(--brand-600);
+    color: var(--white) !important;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 4px 16px rgba(45, 83, 49, 0.25);
+}
+
+.navbar-dropdown-highlight i {
+    color: var(--white) !important;
+}
+
+.navbar-dropdown-highlight:hover {
+    background: var(--brand-500);
+    color: var(--white) !important;
+    transform: translateX(6px) !important;
+    box-shadow: 0 6px 24px rgba(45, 83, 49, 0.35);
+}
+
+/* Divider antar item */
+.navbar-dropdown-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+}
+
+.navbar-dropdown-link:last-child::after,
+.navbar-dropdown-highlight::after {
+    display: none;
+}
+
+/* ===== NAVBAR TOGGLE (HAMBURGER) ===== */
 .navbar-toggle {
     display: none;
     width: 42px;
@@ -334,9 +391,11 @@ a {
     color: var(--stone-700);
     cursor: pointer;
     border-radius: 8px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2;
     margin-left: auto;
+    position: relative;
+    padding: 0;
 }
 
 .navbar-toggle:hover {
@@ -354,89 +413,84 @@ a {
     transform: translateX(40px);
 }
 
-/* ===== MOBILE DROPDOWN ===== */
-.navbar-dropdown {
-    position: fixed;
-    top: var(--navbar-height);
-    right: 0;
-    width: 50%;
-    max-width: 320px;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    border-left: 1px solid rgba(0, 0, 0, 0.04);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    border-radius: 0 0 0 20px;
-    box-shadow: var(--shadow-lg);
-    transform: translateX(0);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+/* ===== HAMBURGER TO X ANIMATION ===== */
+.navbar-toggle i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-toggle .fa-bars {
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.navbar-dropdown.hidden {
-    transform: translateX(100%);
+.navbar-toggle .fa-times {
     opacity: 0;
-    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.5) rotate(90deg);
 }
 
-.navbar-dropdown-inner {
-    padding: 16px 0;
+.navbar-toggle.open .fa-bars {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) rotate(-90deg);
 }
 
-.navbar-dropdown-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 24px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--stone-600);
-    transition: all 0.2s ease;
+.navbar-toggle.open .fa-times {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
 }
 
-.navbar-dropdown-link i {
-    width: 20px;
-    color: var(--brand-400);
-}
-
-.navbar-dropdown-link:hover {
-    background: var(--brand-50);
-    color: var(--brand-600);
-}
-
-.navbar-dropdown-highlight {
-    background: var(--brand-600);
-    color: var(--white) !important;
-    border-radius: 0;
-    margin-top: 8px;
-}
-
-.navbar-dropdown-highlight i {
-    color: var(--white);
-}
-
-.navbar-dropdown-highlight:hover {
-    background: var(--brand-500);
-    color: var(--white) !important;
-}
-
-/* ===== RESPONSIVE NAVBAR ===== */
+/* ===== RESPONSIVE TOGGLE ===== */
 @media (max-width: 768px) {
-    .navbar-menu {
-        display: none;
-    }
-
     .navbar-toggle {
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
+    }
+
+    .navbar-menu {
+        display: none !important;
     }
 }
 
 @media (max-width: 480px) {
     .navbar-dropdown {
-        width: 50%;
         max-width: 280px;
+        border-radius: 0;
     }
+
+    .navbar-dropdown-link {
+        padding: 12px 20px;
+        font-size: 0.875rem;
+        margin: 0 8px;
+    }
+
+    .navbar-dropdown-link i {
+        width: 20px;
+        font-size: 0.875rem;
+    }
+}
+
+/* ===== OVERLAY SAAT DROPDOWN OPEN ===== */
+.navbar-overlay {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 99;
+}
+
+.navbar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ===== HERO SECTION ===== */
@@ -748,7 +802,9 @@ a {
     /* HANYA animasi MASUK, TANPA rotateLeaf */
     animation: rotateInFromRight 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
     filter: blur(1.5px);
-}.hero .hero-right img:first-child {
+}
+
+.hero .hero-right img:first-child {
     user-select: none;
     position: absolute;
     top: -250px;
@@ -757,7 +813,8 @@ a {
     max-width: none;
     height: auto;
     z-index: 1;
-    opacity: 0; /* Awalnya hidden */
+    opacity: 0;
+    /* Awalnya hidden */
     filter: drop-shadow(0 20px 60px rgba(59, 77, 38, 0.05));
     transform-origin: right center;
     filter: blur(1.5px);
@@ -767,19 +824,25 @@ a {
 /* Class untuk animasi loop (infinite) */
 .hero .hero-right img:first-child.leaf-loop {
     animation: rotateLeaf 12s ease-in-out infinite;
-    opacity: 1; /* Muncul setelah JS set class */
+    opacity: 1;
+    /* Muncul setelah JS set class */
 }
 
 @keyframes rotateLeaf {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: rotate(-15deg) scale(0.9);
     }
+
     25% {
         transform: rotate(-10deg) scale(0.92);
     }
+
     50% {
         transform: rotate(-15deg) scale(0.88);
     }
+
     75% {
         transform: rotate(-12deg) scale(0.91);
     }
@@ -803,6 +866,7 @@ a {
         transform: translateY(200px);
         opacity: 0;
     }
+
     100% {
         transform: translateY(0);
         opacity: 1;
