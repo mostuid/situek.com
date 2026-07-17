@@ -2297,17 +2297,29 @@ a {
     }
 
     .footer-modern-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px 32px;
+        grid-template-columns: 1fr; /* Ubah menjadi 1 kolom */
+        gap: 24px;
+        text-align: center; /* Tambahkan text-align center */
+        justify-items: center; /* Pusatkan semua item */
     }
 
     .footer-modern-brand {
         grid-column: 1 / -1;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-modern-desc {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 
     .footer-modern-links {
-        gap: 14px;
+        justify-content: center; /* Pusatkan link */
+        gap: 16px;
         flex-wrap: wrap;
+        width: 100%;
     }
 
     .footer-modern-links a {
@@ -2315,11 +2327,23 @@ a {
     }
 
     .footer-modern-social {
-        gap: 16px;
+        justify-content: center; /* Pusatkan social icons */
+        gap: 20px;
+        width: 100%;
     }
 
     .footer-modern-social a {
         font-size: 1.1rem;
+    }
+
+    .footer-modern-bottom {
+        flex-direction: column; /* Buat bottom text jadi column */
+        gap: 4px;
+        text-align: center;
+    }
+
+    .footer-modern-dot {
+        display: none; /* Sembunyikan dot separator */
     }
 }
 
@@ -2384,8 +2408,8 @@ a {
 
     .btn-shopee,
     .btn-tiktok {
-        min-width: 60px;
-        height: 28px;
+        min-width: 30px;
+        height: auto;
         font-size: 0.625rem;
     }
 
