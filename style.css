@@ -808,7 +808,7 @@ a {
 }
 
 /* ===== RESPONSIVE HERO ===== */
-@media (max-width: 1024px) {
+@media (max-width: 1080px) {
     .hero {
         padding: 60px 0;
         padding-top: calc(60px + var(--navbar-height));
