@@ -1,3 +1,8 @@
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
 /* ===== PREVENT HORIZONTAL SCROLL ===== */
 html,
 body {
@@ -424,7 +429,7 @@ a {
         display: flex;
         align-items: center;
         justify-content: center;
-    }    
+    }
 }
 
 @media (max-width: 480px) {
@@ -740,43 +745,41 @@ a {
     opacity: 0;
     filter: drop-shadow(0 20px 60px rgba(59, 77, 38, 0.05));
     transform-origin: right center;
-    animation: rotateInFromRight 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards,
-        rotateLeaf 12s ease-in-out infinite 1.2s;
+    /* HANYA animasi MASUK, TANPA rotateLeaf */
+    animation: rotateInFromRight 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
     filter: blur(1.5px);
+}.hero .hero-right img:first-child {
+    user-select: none;
+    position: absolute;
+    top: -250px;
+    right: -280px;
+    width: 750px;
+    max-width: none;
+    height: auto;
+    z-index: 1;
+    opacity: 0; /* Awalnya hidden */
+    filter: drop-shadow(0 20px 60px rgba(59, 77, 38, 0.05));
+    transform-origin: right center;
+    filter: blur(1.5px);
+    transform: rotate(-15deg) scale(0.9);
 }
 
-@keyframes rotateInFromRight {
-    0% {
-        transform: rotate(-80deg) scale(0.5);
-        opacity: 0;
-    }
-
-    60% {
-        transform: rotate(-10deg) scale(0.95);
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: rotate(-15deg) scale(0.9);
-        opacity: 1;
-    }
+/* Class untuk animasi loop (infinite) */
+.hero .hero-right img:first-child.leaf-loop {
+    animation: rotateLeaf 12s ease-in-out infinite;
+    opacity: 1; /* Muncul setelah JS set class */
 }
 
 @keyframes rotateLeaf {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: rotate(-15deg) scale(0.9);
     }
-
     25% {
         transform: rotate(-10deg) scale(0.92);
     }
-
     50% {
         transform: rotate(-15deg) scale(0.88);
     }
-
     75% {
         transform: rotate(-12deg) scale(0.91);
     }
@@ -800,7 +803,6 @@ a {
         transform: translateY(200px);
         opacity: 0;
     }
-
     100% {
         transform: translateY(0);
         opacity: 1;
@@ -2297,10 +2299,13 @@ a {
     }
 
     .footer-modern-grid {
-        grid-template-columns: 1fr; /* Ubah menjadi 1 kolom */
+        grid-template-columns: 1fr;
+        /* Ubah menjadi 1 kolom */
         gap: 24px;
-        text-align: center; /* Tambahkan text-align center */
-        justify-items: center; /* Pusatkan semua item */
+        text-align: center;
+        /* Tambahkan text-align center */
+        justify-items: center;
+        /* Pusatkan semua item */
     }
 
     .footer-modern-brand {
@@ -2316,7 +2321,8 @@ a {
     }
 
     .footer-modern-links {
-        justify-content: center; /* Pusatkan link */
+        justify-content: center;
+        /* Pusatkan link */
         gap: 16px;
         flex-wrap: wrap;
         width: 100%;
@@ -2327,7 +2333,8 @@ a {
     }
 
     .footer-modern-social {
-        justify-content: center; /* Pusatkan social icons */
+        justify-content: center;
+        /* Pusatkan social icons */
         gap: 20px;
         width: 100%;
     }
@@ -2337,13 +2344,15 @@ a {
     }
 
     .footer-modern-bottom {
-        flex-direction: column; /* Buat bottom text jadi column */
+        flex-direction: column;
+        /* Buat bottom text jadi column */
         gap: 4px;
         text-align: center;
     }
 
     .footer-modern-dot {
-        display: none; /* Sembunyikan dot separator */
+        display: none;
+        /* Sembunyikan dot separator */
     }
 }
 
