@@ -1133,7 +1133,7 @@ a {
 
     .hero .hero-right img:last-child {
         width: 360px;
-        right: -10px;
+        right: 5px;
         bottom: -5px;
     }
 
