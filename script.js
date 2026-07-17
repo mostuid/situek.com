@@ -219,5 +219,42 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // ============================================
+// LAZY LOADING GAMBAR - SIMPEL & EFEKTIF
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Tambahkan loading="lazy" ke semua gambar (kecuali hero)
+    document.querySelectorAll('img:not(.hero img)').forEach(img => {
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
+        }
+    });
+    
+    // 2. Hero images - priority tinggi
+    document.querySelectorAll('.hero img').forEach(img => {
+        img.setAttribute('fetchpriority', 'high');
+        img.setAttribute('loading', 'eager');
+    });
+    
+    // 3. Deteksi gambar selesai loading (efek fade in)
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        // Tambahkan class untuk efek fade
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease';
+        
+        // Saat gambar selesai loading
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        // Jika gambar sudah di-cache
+        if (img.complete) {
+            img.style.opacity = '1';
+        }
+    });
+});
+
+
+// ============================================
 // END OF JAVASCRIPT
 // ============================================
