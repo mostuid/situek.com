@@ -1,8 +1,18 @@
+/* ===== PREVENT HORIZONTAL SCROLL ===== */
+html,
+body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
 /* ===== RESET & BASE ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    max-width: 100%;
+    /* Gabungkan di sini */
 }
 
 html {
@@ -20,6 +30,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
+    overflow: hidden;
+    /* Tambahkan ini */
 }
 
 img {
@@ -160,7 +172,7 @@ a {
     z-index: 100;
     background: transparent;
     transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     height: var(--navbar-height);
     overflow: visible;
 }
@@ -213,7 +225,7 @@ a {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     margin-left: auto;
-    
+
     /* Initial state - visible */
     transform: translateX(0);
     opacity: 1;
@@ -412,22 +424,7 @@ a {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    /* Saat scrolled di mobile, toggle tetap terlihat tapi kecil */
-    .navbar.scrolled .navbar-toggle {
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        font-size: 1rem;
-        width: 36px;
-        height: 36px;
-    }
-
-    /* Logo tetap di tengah saat scrolled di mobile */
-    .navbar.scrolled .navbar-logo img {
-        height: 32px;
-    }
+    }    
 }
 
 @media (max-width: 480px) {
@@ -548,7 +545,7 @@ a {
     font-weight: 600;
     color: #3B4D26;
     font-family: 'Times New Roman', Times, serif;
-    margin-bottom: -36px;
+    margin-bottom: -33px;
     margin-left: 10px;
     position: relative;
     width: fit-content;
@@ -849,12 +846,12 @@ a {
     }
 
     .hero .text h1 {
-        font-size: 5.5rem;
+        font-size: 10rem;
         animation-delay: 0.6s;
     }
 
     .hero .text h3 {
-        max-width: 100%;
+        max-width: 70%;
         margin-left: auto;
         margin-right: auto;
         padding-left: 0;
@@ -862,6 +859,7 @@ a {
         padding-top: 8px;
         border-top: 2px solid rgba(59, 77, 38, 0.1);
         animation-delay: 0.7s;
+        font-size: 1rem;
     }
 
     .hero .btn-hero {
@@ -878,13 +876,12 @@ a {
     .hero .hero-right {
         width: 100%;
         min-height: 380px;
-        overflow: hidden;
     }
 
     .hero .hero-right img:first-child {
-        width: 200px;
-        top: -20px;
-        right: -20px;
+        width: 500px;
+        top: -115px;
+        right: -35px;
         transform-origin: right center;
     }
 
@@ -926,9 +923,9 @@ a {
     }
 
     .hero .hero-right img:last-child {
-        width: 450px;
-        right: -30px;
-        bottom: -20px;
+        width: 650px;
+        right: 130px;
+        bottom: -50px;
     }
 
     @keyframes slideUp {
@@ -944,9 +941,9 @@ a {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
     .hero .text h1 {
-        font-size: 4rem;
+        font-size: 10rem;
     }
 
     .hero .text h3 {
@@ -972,11 +969,15 @@ a {
     }
 
     .hero .hero-right img:last-child {
-        width: 350px;
+        width: 550px;
+        top: 20px;
+        right: 50px;
     }
 
     .hero .hero-right img:first-child {
-        width: 160px;
+        width: 360px;
+        top: -100px;
+        right: -50px;
     }
 }
 
@@ -998,18 +999,18 @@ a {
     }
 
     .hero .text h2 {
-        font-size: 0.9rem;
+        font-size: 1.5rem;
         margin-bottom: -20px;
         animation-delay: 0.3s;
     }
 
     .hero .text h1 {
-        font-size: 3rem;
+        font-size: 6rem;
         animation-delay: 0.4s;
     }
 
     .hero .text h3 {
-        font-size: 1rem;
+        font-size: 0.9rem;
         margin-top: 4px;
         animation-delay: 0.5s;
     }
@@ -1046,14 +1047,14 @@ a {
     }
 
     .hero .hero-right img:first-child {
-        width: 120px;
-        top: -15px;
-        right: -10px;
+        width: 280px;
+        top: -65px;
+        right: -55px;
     }
 
     .hero .hero-right img:last-child {
-        width: 280px;
-        right: -15px;
+        width: 440px;
+        right: 15px;
         bottom: -10px;
     }
 
@@ -1077,11 +1078,19 @@ a {
 
 @media (max-width: 480px) {
     .hero .text h1 {
-        font-size: 2.5rem;
+        font-size: 6rem;
     }
 
     .hero .text h3 {
-        font-size: 0.875rem;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        border-left: none;
+        padding-top: 15px;
+        border-top: 2px solid rgba(59, 77, 38, 0.1);
+        animation-delay: 0.7s;
+        font-size: 0.8rem;
     }
 
     /* Animasi lebih cepat untuk mobile kecil */
@@ -1091,6 +1100,7 @@ a {
     }
 
     .hero .text h2 {
+        font-size: 1.5rem;
         animation-delay: 0.2s;
     }
 
@@ -1115,14 +1125,14 @@ a {
     }
 
     .hero .hero-right img:first-child {
-        width: 90px;
-        top: -10px;
-        right: -5px;
+        width: 230px;
+        top: -40px;
+        right: -50px;
     }
 
     .hero .hero-right img:last-child {
-        width: 220px;
-        right: -10px;
+        width: 360px;
+        right: -15px;
         bottom: -5px;
     }
 
