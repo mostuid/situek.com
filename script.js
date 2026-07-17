@@ -218,42 +218,99 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
 });
 
-// ============================================
-// LAZY LOADING GAMBAR - SIMPEL & EFEKTIF
-// ============================================
-
+// ===== LAZY LOADING + FADE EFFECT =====
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Tambahkan loading="lazy" ke semua gambar (kecuali hero)
     document.querySelectorAll('img:not(.hero img)').forEach(img => {
-        if (!img.hasAttribute('loading')) {
-            img.setAttribute('loading', 'lazy');
-        }
-    });
-    
-    // 2. Hero images - priority tinggi
-    document.querySelectorAll('.hero img').forEach(img => {
-        img.setAttribute('fetchpriority', 'high');
-        img.setAttribute('loading', 'eager');
-    });
-    
-    // 3. Deteksi gambar selesai loading (efek fade in)
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        // Tambahkan class untuk efek fade
+        img.loading = 'lazy';
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.5s ease';
         
-        // Saat gambar selesai loading
         img.addEventListener('load', function() {
             this.style.opacity = '1';
         });
         
-        // Jika gambar sudah di-cache
         if (img.complete) {
             img.style.opacity = '1';
         }
     });
+    
+    document.querySelectorAll('.hero img').forEach(img => {
+        img.fetchPriority = 'high';
+        img.loading = 'eager';
+    });
 });
 
+// ============================================
+// ANIMASI DAUN - JS Masuk (Overshoot Rotasi + Scale) + CSS Loop
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const leaf = document.querySelector('.hero .hero-right img:first-child');
+    if (!leaf) return;
+
+    // State
+    let startTime = null;
+    let animFrameId = null;
+    let isAnimating = true;
+    
+    // Parameter animasi masuk
+    const startRotation = -80;
+    const endRotation = -15;
+    const overshootRotation = -5; // Rotasi kelewatan (melewati -15 ke -5)
+    const startScale = 0.3;
+    const endScale = 0.9;
+    const overshootScale = 0.95; // Scale kelewatan (melewati 0.9 ke 0.95)
+    const duration = 1400;
+    
+    function animateEntrance(timestamp) {
+        if (!isAnimating) return;
+        if (!startTime) startTime = timestamp;
+        
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing easeOutBack (overshoot)
+        function easeOutBack(x) {
+            const c1 = 1.70158;
+            const c3 = c1 + 1;
+            return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+        }
+        
+        const eased = easeOutBack(progress);
+        
+        // Rotasi: dari -80 ke -15, tapi overshoot ke -5 dulu baru balik
+        const rotation = startRotation + (overshootRotation - startRotation) * eased;
+        // Kalau progress 1, rotasi harus -15 (bukan -5)
+        const finalRotation = rotation - (overshootRotation - endRotation) * (1 - Math.pow(1 - progress, 3));
+        
+        // Scale: dari 0.3 ke 0.9, overshoot ke 0.95 dulu baru balik
+        const scale = startScale + (overshootScale - startScale) * eased;
+        const finalScale = scale - (overshootScale - endScale) * (1 - Math.pow(1 - progress, 3));
+        
+        // Terapkan
+        leaf.style.transform = `rotate(${finalRotation}deg) scale(${finalScale})`;
+        leaf.style.opacity = Math.min(progress * 1.2, 1);
+        
+        if (progress < 1) {
+            animFrameId = requestAnimationFrame(animateEntrance);
+        } else {
+            // Animasi selesai
+            leaf.style.transform = `rotate(-15deg) scale(0.9)`;
+            leaf.style.opacity = '1';
+            leaf.classList.add('leaf-loop');
+            isAnimating = false;
+        }
+    }
+    
+    // Mulai animasi masuk
+    animFrameId = requestAnimationFrame(animateEntrance);
+    
+    // Bersihkan
+    window.addEventListener('beforeunload', function() {
+        isAnimating = false;
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+    });
+});
 
 // ============================================
 // END OF JAVASCRIPT
