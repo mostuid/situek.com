@@ -1350,6 +1350,10 @@ a {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
     cursor: pointer;
+    
+    /* Flex column agar konsisten */
+    display: flex;
+    flex-direction: column;
 }
 
 .produk-card:hover {
@@ -1401,15 +1405,25 @@ a {
     font-size: 0.875rem;
     color: var(--stone-500);
     margin-top: 4px;
+    flex: 1; /* Dorong footer ke bawah */
 }
 
 .produk-footer {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-between; /* Harga di kiri, tombol di kanan */
     margin-top: 16px;
     padding-top: 16px;
     border-top: 1px solid var(--stone-100);
+    margin-top: auto; /* Pastikan di bawah */
+    width: 100%;
+}
+
+.produk-price-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
 .produk-price {
@@ -1421,12 +1435,12 @@ a {
 .produk-unit {
     font-size: 0.875rem;
     color: var(--stone-400);
-    margin-left: 4px;
 }
 
 .produk-actions {
     display: flex;
     gap: 6px;
+    flex-shrink: 0; /* Tombol tidak mengecil */
 }
 
 .btn-shopee,
@@ -1434,33 +1448,59 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     transition: all 0.3s ease;
     background: transparent;
     border-radius: 100%;
     overflow: hidden;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
 }
 
 .btn-shopee:hover,
 .btn-tiktok:hover {
-    transform: translateY(-2px);
+    transform: scale(1.1);
 }
 
-.btn-shopee:hover {
-    box-shadow: 0 6px 14px rgba(238, 77, 45, 0.3);
-}
-
-.btn-tiktok:hover {
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+.btn-shopee:active,
+.btn-tiktok:active {
+    transform: scale(0.95);
 }
 
 .btn-shopee img,
 .btn-tiktok img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .section-produk {
+        padding: 56px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .produk-card {
+        padding: 16px;
+    }
+    
+    .produk-image {
+        height: 140px;
+    }
+    
+    .btn-shopee,
+    .btn-tiktok {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 /* ===== TESTIMONI SECTION BARU ===== */
