@@ -1521,7 +1521,7 @@ a {
     position: relative;
 }
 
-/* ===== GRADIENT KIRI & KANAN DI WRAPPER UTAMA ===== */
+/* ===== GRADIENT KIRI & KANAN ===== */
 .testimoni-running-wrapper::before,
 .testimoni-running-wrapper::after {
     content: '';
@@ -1551,7 +1551,7 @@ a {
     margin: 0 auto 48px;
     padding: 0 24px;
     position: relative;
-    z-index: 3; /* Pastikan di atas gradient */
+    z-index: 3;
 }
 
 .testimoni-running-label {
@@ -1575,20 +1575,16 @@ a {
     position: relative;
     overflow: hidden;
     width: 100%;
-    z-index: 1; /* Di bawah gradient */
+    z-index: 1;
 }
 
 /* ===== RUNNING TRACK ===== */
 .testimoni-running-track {
     display: flex;
     gap: 30px;
-    animation: scrollTestimoni 10s linear infinite;
     width: max-content;
     padding: 10px 0;
-}
-
-.testimoni-running-track:hover {
-    animation-play-state: paused;
+    will-change: transform;
 }
 
 /* ===== TESTIMONI ITEM ===== */
@@ -1659,18 +1655,9 @@ a {
     color: var(--brand-300);
 }
 
-/* ===== ANIMASI SCROLL ===== */
-@keyframes scrollTestimoni {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
+
     .testimoni-running-wrapper::before,
     .testimoni-running-wrapper::after {
         width: 100px;
@@ -1681,26 +1668,25 @@ a {
     .testimoni-running-wrapper {
         padding: 56px 0 56px;
     }
-    
+
     .testimoni-running-title {
         font-size: 1.75rem;
     }
-    
+
     .testimoni-running-item {
         flex: 0 0 290px;
         padding: 20px 22px;
     }
-    
+
     .testimoni-running-text {
         font-size: 0.85rem;
         min-height: 60px;
     }
-    
+
     .testimoni-running-track {
         gap: 20px;
-        animation-duration: 8s;
     }
-    
+
     .testimoni-running-wrapper::before,
     .testimoni-running-wrapper::after {
         width: 60px;
@@ -1711,44 +1697,43 @@ a {
     .testimoni-running-wrapper {
         padding: 80px 0 80px;
     }
-    
+
     .testimoni-running-header {
         margin-bottom: 32px;
     }
-    
+
     .testimoni-running-title {
         font-size: 1.5rem;
     }
-    
+
     .testimoni-running-item {
         flex: 0 0 260px;
         padding: 16px 18px;
     }
-    
+
     .testimoni-running-text {
         font-size: 0.8rem;
         min-height: 50px;
     }
-    
+
     .testimoni-running-track {
         gap: 16px;
-        animation-duration: 5s;
     }
-    
+
     .testimoni-running-avatar {
         width: 34px;
         height: 34px;
         font-size: 0.8rem;
     }
-    
+
     .testimoni-running-name {
         font-size: 0.8rem;
     }
-    
+
     .testimoni-running-role {
         font-size: 0.65rem;
     }
-    
+
     .testimoni-running-wrapper::before,
     .testimoni-running-wrapper::after {
         width: 40px;
