@@ -1328,13 +1328,19 @@ a {
     gap: 24px;
 }
 
+@media (min-width: 480px) {
+    .produk-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 @media (min-width: 640px) {
     .produk-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1032px) {
     .produk-grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -1349,7 +1355,7 @@ a {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
     cursor: pointer;
-    
+
     /* Flex column agar konsisten */
     display: flex;
     flex-direction: column;
@@ -1404,31 +1410,34 @@ a {
     font-size: 0.875rem;
     color: var(--stone-500);
     margin-top: 4px;
-    flex: 1; /* Dorong footer ke bawah */
+    flex: 1;
+    /* Dorong footer ke bawah */
 }
 
 .produk-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Harga di kiri, tombol di kanan */
+    justify-content: space-between;
+    /* Harga di kiri, tombol di kanan */
     margin-top: 16px;
     padding-top: 16px;
     border-top: 1px solid var(--stone-100);
-    margin-top: auto; /* Pastikan di bawah */
+    margin-top: auto;
+    /* Pastikan di bawah */
     width: 100%;
 }
 
 .produk-price-wrapper {
     display: flex;
-    align-items: baseline;
-    gap: 4px;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .produk-price {
     font-size: 1.25rem;
     font-weight: 800;
     color: var(--brand-600);
+    margin-bottom: -3px;
 }
 
 .produk-unit {
@@ -1438,8 +1447,9 @@ a {
 
 .produk-actions {
     display: flex;
-    gap: 6px;
-    flex-shrink: 0; /* Tombol tidak mengecil */
+    gap: 10px;
+    flex-shrink: 0;
+    /* Tombol tidak mengecil */
 }
 
 .btn-shopee,
@@ -1482,19 +1492,19 @@ a {
     .section-produk {
         padding: 56px 0;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .produk-card {
         padding: 16px;
     }
-    
+
     .produk-image {
         height: 140px;
     }
-    
+
     .btn-shopee,
     .btn-tiktok {
         width: 32px;
@@ -1502,20 +1512,24 @@ a {
     }
 }
 
-/* ===== TESTIMONI SECTION BARU ===== */
-.section-testimoni-new {
-    padding: 80px 0;
-    background: linear-gradient(135deg, var(--brand-700), var(--brand-900));
+/* ===== TESTIMONI RUNNING TEXT ===== */
+.testimoni-running-wrapper {
     overflow: hidden;
+    width: 100%;
+    background: linear-gradient(135deg, var(--brand-700), var(--brand-900));
+    padding: 80px 0 60px;
+    position: relative;
 }
 
-.testimoni-new-header {
+/* ===== HEADER STYLE ===== */
+.testimoni-running-header {
     text-align: center;
     max-width: 42rem;
-    margin: 0 auto 56px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
 }
 
-.testimoni-new-label {
+.testimoni-running-label {
     display: inline-block;
     font-size: 0.75rem;
     font-weight: 600;
@@ -1524,146 +1538,208 @@ a {
     color: var(--brand-200);
 }
 
-.testimoni-new-title {
+.testimoni-running-title {
     font-size: 2.25rem;
     font-weight: 800;
     color: var(--white);
     margin-top: 0.5rem;
 }
 
-.testimoni-new-subtitle {
-    color: var(--brand-100);
-    margin-top: 0.75rem;
+/* ===== RUNNING TRACK ===== */
+.testimoni-running-track-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
 }
 
-/* ===== GRID ===== */
-.testimoni-new-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+.testimoni-running-track-wrapper::before,
+.testimoni-running-track-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* ===== CARD ===== */
-.testimoni-new-card {
-    user-select: none;
-    background: rgba(255, 255, 255, 0.06);
+.testimoni-running-track-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--brand-700), transparent);
+}
+
+.testimoni-running-track-wrapper::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--brand-900), transparent);
+}
+
+.testimoni-running-track {
+    display: flex;
+    gap: 30px;
+    animation: scrollTestimoni 8s linear infinite;
+    width: max-content;
+    padding: 10px 0;
+}
+
+.testimoni-running-track:hover {
+    animation-play-state: paused;
+}
+
+/* ===== TESTIMONI ITEM ===== */
+.testimoni-running-item {
+    flex: 0 0 340px;
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 24px 28px;
+    border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    
-    /* Initial state - hidden */
-    opacity: 0;
-    transform: translateY(40px);
-    
-    /* Hanya 1 transition untuk semua properti */
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                background 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+    color: var(--white);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
 }
 
-/* Visible state - diatur oleh JS */
-.testimoni-new-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* HOVER - Tanpa delay, langsung responsif */
-.testimoni-new-card:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.15);
+.testimoni-running-item:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: scale(1.02) translateY(-4px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== CARD CONTENT ===== */
-.testimoni-new-stars {
+.testimoni-running-stars {
     display: flex;
     gap: 4px;
     color: #f59e0b;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     margin-bottom: 12px;
 }
 
-.testimoni-new-text {
-    color: var(--brand-50);
-    font-size: 0.9375rem;
+.testimoni-running-text {
+    font-size: 0.95rem;
     line-height: 1.7;
+    color: var(--brand-50);
     margin-bottom: 16px;
-    min-height: 72px;
+    min-height: 70px;
 }
 
-.testimoni-new-author {
+.testimoni-running-author {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.testimoni-new-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-full);
+.testimoni-running-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: rgba(255, 255, 255, 0.12);
-    color: var(--brand-200);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    color: var(--brand-200);
     flex-shrink: 0;
 }
 
-.testimoni-new-name {
-    font-weight: 700;
+.testimoni-running-name {
+    font-weight: 600;
+    font-size: 0.9rem;
     color: var(--white);
-    font-size: 0.875rem;
 }
 
-.testimoni-new-role {
+.testimoni-running-role {
     font-size: 0.75rem;
-    color: var(--brand-200);
+    color: var(--brand-300);
+}
+
+/* ===== ANIMASI SCROLL ===== */
+@keyframes scrollTestimoni {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 /* ===== RESPONSIVE ===== */
-
-/* Tablet */
-@media (min-width: 640px) {
-    .testimoni-new-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-    .testimoni-new-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* Mobile - max-width 768px */
 @media (max-width: 768px) {
-    .testimoni-new-text {
-        min-height: auto;
-    }
-}
-
-/* Mobile kecil - max-width 480px */
-@media (max-width: 480px) {
-    .section-testimoni-new {
-        padding: 56px 0;
+    .testimoni-running-wrapper {
+        padding: 56px 0 40px;
     }
 
-    .testimoni-new-title {
+    .testimoni-running-title {
         font-size: 1.75rem;
     }
 
-    .testimoni-new-card {
-        padding: 20px;
+    .testimoni-running-item {
+        flex: 0 0 290px;
+        padding: 20px 22px;
     }
 
-    .testimoni-new-text {
-        font-size: 0.875rem;
+    .testimoni-running-text {
+        font-size: 0.85rem;
+        min-height: 60px;
+    }
+
+    .testimoni-running-track {
+        gap: 20px;
+        animation-duration: 5s;
+    }
+
+    .testimoni-running-track-wrapper::before,
+    .testimoni-running-track-wrapper::after {
+        width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimoni-running-wrapper {
+        padding: 40px 0 30px;
+    }
+
+    .testimoni-running-header {
+        margin-bottom: 32px;
+    }
+
+    .testimoni-running-title {
+        font-size: 1.5rem;
+    }
+
+    .testimoni-running-item {
+        flex: 0 0 260px;
+        padding: 16px 18px;
+    }
+
+    .testimoni-running-text {
+        font-size: 0.8rem;
+        min-height: 50px;
+    }
+
+    .testimoni-running-track {
+        gap: 16px;
+        animation-duration: 3s;
+    }
+
+    .testimoni-running-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
+    }
+
+    .testimoni-running-name {
+        font-size: 0.8rem;
+    }
+
+    .testimoni-running-role {
+        font-size: 0.65rem;
+    }
+
+    .testimoni-running-track-wrapper::before,
+    .testimoni-running-track-wrapper::after {
+        width: 40px;
     }
 }
 
