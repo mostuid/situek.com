@@ -1517,8 +1517,31 @@ a {
     overflow: hidden;
     width: 100%;
     background: linear-gradient(135deg, var(--brand-700), var(--brand-900));
-    padding: 80px 0 60px;
+    padding: 90px 0 90px;
     position: relative;
+}
+
+/* ===== GRADIENT KIRI & KANAN DI WRAPPER UTAMA ===== */
+.testimoni-running-wrapper::before,
+.testimoni-running-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.testimoni-running-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--brand-700) 0%, transparent 100%);
+}
+
+.testimoni-running-wrapper::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--brand-900) 0%, transparent 100%);
 }
 
 /* ===== HEADER STYLE ===== */
@@ -1527,6 +1550,8 @@ a {
     max-width: 42rem;
     margin: 0 auto 48px;
     padding: 0 24px;
+    position: relative;
+    z-index: 3; /* Pastikan di atas gradient */
 }
 
 .testimoni-running-label {
@@ -1545,38 +1570,19 @@ a {
     margin-top: 0.5rem;
 }
 
-/* ===== RUNNING TRACK ===== */
+/* ===== RUNNING TRACK WRAPPER ===== */
 .testimoni-running-track-wrapper {
     position: relative;
     overflow: hidden;
     width: 100%;
+    z-index: 1; /* Di bawah gradient */
 }
 
-.testimoni-running-track-wrapper::before,
-.testimoni-running-track-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 120px;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.testimoni-running-track-wrapper::before {
-    left: 0;
-    background: linear-gradient(90deg, var(--brand-700), transparent);
-}
-
-.testimoni-running-track-wrapper::after {
-    right: 0;
-    background: linear-gradient(270deg, var(--brand-900), transparent);
-}
-
+/* ===== RUNNING TRACK ===== */
 .testimoni-running-track {
     display: flex;
     gap: 30px;
-    animation: scrollTestimoni 8s linear infinite;
+    animation: scrollTestimoni 10s linear infinite;
     width: max-content;
     padding: 10px 0;
 }
@@ -1658,87 +1664,93 @@ a {
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(-50%);
     }
 }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .testimoni-running-wrapper::before,
+    .testimoni-running-wrapper::after {
+        width: 100px;
+    }
+}
+
 @media (max-width: 768px) {
     .testimoni-running-wrapper {
-        padding: 56px 0 40px;
+        padding: 56px 0 56px;
     }
-
+    
     .testimoni-running-title {
         font-size: 1.75rem;
     }
-
+    
     .testimoni-running-item {
         flex: 0 0 290px;
         padding: 20px 22px;
     }
-
+    
     .testimoni-running-text {
         font-size: 0.85rem;
         min-height: 60px;
     }
-
+    
     .testimoni-running-track {
         gap: 20px;
-        animation-duration: 5s;
+        animation-duration: 8s;
     }
-
-    .testimoni-running-track-wrapper::before,
-    .testimoni-running-track-wrapper::after {
+    
+    .testimoni-running-wrapper::before,
+    .testimoni-running-wrapper::after {
         width: 60px;
     }
 }
 
 @media (max-width: 480px) {
     .testimoni-running-wrapper {
-        padding: 40px 0 30px;
+        padding: 80px 0 80px;
     }
-
+    
     .testimoni-running-header {
         margin-bottom: 32px;
     }
-
+    
     .testimoni-running-title {
         font-size: 1.5rem;
     }
-
+    
     .testimoni-running-item {
         flex: 0 0 260px;
         padding: 16px 18px;
     }
-
+    
     .testimoni-running-text {
         font-size: 0.8rem;
         min-height: 50px;
     }
-
+    
     .testimoni-running-track {
         gap: 16px;
-        animation-duration: 3s;
+        animation-duration: 5s;
     }
-
+    
     .testimoni-running-avatar {
         width: 34px;
         height: 34px;
         font-size: 0.8rem;
     }
-
+    
     .testimoni-running-name {
         font-size: 0.8rem;
     }
-
+    
     .testimoni-running-role {
         font-size: 0.65rem;
     }
-
-    .testimoni-running-track-wrapper::before,
-    .testimoni-running-track-wrapper::after {
+    
+    .testimoni-running-wrapper::before,
+    .testimoni-running-wrapper::after {
         width: 40px;
     }
 }
