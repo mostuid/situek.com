@@ -207,59 +207,118 @@ animateElements.forEach((el) => {
     observer.observe(el);
 });
 
-// ===== ANIMASI TESTIMONI BARU - BERANTAI =====
+// ============================================
+// TESTIMONI RUNNING TEXT - LOOPING HALUS DENGAN JS
+// ============================================
+
 document.addEventListener('DOMContentLoaded', function () {
-    const testimoniCards = document.querySelectorAll('.testimoni-new-card');
+    const track = document.querySelector('.testimoni-running-track');
+    if (!track) return;
 
-    if (testimoniCards.length === 0) return;
+    let animationId = null;
+    let position = 0;
+    let speed = 1; // Pixels per frame (60fps)
+    let isPaused = false;
 
-    // Buat observer untuk mendeteksi kapan section terlihat
-    const sectionObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // Saat section terlihat, jalankan animasi berantai
-                    animateTestimoniCards();
-                    // Hentikan observer setelah animasi dimulai
-                    sectionObserver.unobserve(entry.target);
-                }
-            });
-        },
-        {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        }
-    );
+    // Clone items untuk seamless looping
+    function setupInfiniteScroll() {
+        const items = track.querySelectorAll('.testimoni-running-item');
+        const totalWidth = track.scrollWidth;
 
-    // Cari container grid dan observe
-    const gridContainer = document.querySelector('.testimoni-new-grid');
-    if (gridContainer) {
-        sectionObserver.observe(gridContainer);
+        // Clone semua item dan tambahkan ke track
+        items.forEach(item => {
+            const clone = item.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        // Set initial position
+        position = 0;
+        track.style.transform = `translateX(${position}px)`;
     }
 
-    // Fungsi animasi berantai
-    function animateTestimoniCards() {
-        testimoniCards.forEach((card, index) => {
-            // Delay berurutan: 100ms, 200ms, 300ms, dst
-            const delay = (index + 1) * 100;
+    // Animasi loop
+    function animate() {
+        if (!isPaused) {
+            // Kurangi posisi (gerak ke kiri)
+            position -= speed;
 
+            // Reset posisi saat setengah dari total lebar tercapai
+            const halfWidth = track.scrollWidth / 2;
+            if (Math.abs(position) >= halfWidth) {
+                position = 0;
+            }
+
+            // Terapkan transform
+            track.style.transform = `translateX(${position}px)`;
+        }
+
+        // Lanjutkan animasi
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // Pause on hover
+    function setupHoverControls() {
+        const wrapper = document.querySelector('.testimoni-running-track-wrapper');
+
+        wrapper.addEventListener('mouseenter', function () {
+            isPaused = true;
+        });
+
+        wrapper.addEventListener('mouseleave', function () {
+            isPaused = false;
+        });
+
+        // Touch support untuk mobile
+        wrapper.addEventListener('touchstart', function () {
+            isPaused = true;
+        });
+
+        wrapper.addEventListener('touchend', function () {
             setTimeout(() => {
-                card.classList.add('visible');
-            }, delay);
+                isPaused = false;
+            }, 3000); // Pause 3 detik setelah touch
         });
     }
 
-    // Backup: Jika section sudah terlihat saat load
-    // Cek apakah grid sudah visible
-    if (gridContainer) {
-        const rect = gridContainer.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-
-        if (rect.top < windowHeight - 50) {
-            // Sudah visible, jalankan animasi
-            setTimeout(animateTestimoniCards, 300);
+    // Atur kecepatan berdasarkan ukuran layar
+    function setSpeed() {
+        const width = window.innerWidth;
+        if (width <= 480) {
+            speed = 0.8;
+        } else if (width <= 768) {
+            speed = 1.2;
+        } else {
+            speed = 1.5;
         }
     }
+
+    // Inisialisasi
+    function init() {
+        setupInfiniteScroll();
+        setSpeed();
+        setupHoverControls();
+
+        // Mulai animasi
+        if (animationId) cancelAnimationFrame(animationId);
+        animate();
+    }
+
+    // Re-initialize pada resize
+    let resizeTimeout;
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            setSpeed();
+        }, 200);
+    });
+
+    // Mulai
+    init();
+
+    // Cleanup
+    window.addEventListener('beforeunload', function () {
+        if (animationId) cancelAnimationFrame(animationId);
+    });
 });
 
 // ===== FAQ ACCORDION =====
