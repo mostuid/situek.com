@@ -1895,7 +1895,7 @@ a {
 
 .artikel-side-readmore:hover {
     gap: 12px;
-    color: var(--stone-100);
+    color: var(--brand-500);
 }
 
 /* ===== RESPONSIVE ===== */
