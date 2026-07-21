@@ -1305,7 +1305,11 @@ a {
     box-shadow: var(--shadow-xl);
 }
 
-/* ===== PRODUK ===== */
+/* ========================================
+   PRODUK SECTION
+   ======================================== */
+
+/* ----- Container & Layout ----- */
 .section-produk {
     padding: 80px 0;
     background: var(--white);
@@ -1317,17 +1321,45 @@ a {
     margin: 0 auto 56px;
 }
 
-.section-title {
-    font-size: 2.5rem;
-    margin-top: -5px;
+.section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--brand-500);
+    background: rgba(61, 110, 66, 0.1);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    margin-bottom: 12px;
 }
 
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--stone-900);
+    margin-top: -5px;
+    line-height: 1.2;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-400));
+    border-radius: 4px;
+    margin: 12px auto 0;
+}
+
+/* ----- Grid Produk ----- */
 .produk-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
 }
 
+/* Responsive Grid */
 @media (min-width: 480px) {
     .produk-grid {
         grid-template-columns: 1fr 1fr;
@@ -1346,6 +1378,7 @@ a {
     }
 }
 
+/* ----- Card Produk ----- */
 .produk-card {
     background: #f8fbf8;
     border-radius: 24px;
@@ -1355,8 +1388,6 @@ a {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
     cursor: pointer;
-
-    /* Flex column agar konsisten */
     display: flex;
     flex-direction: column;
 }
@@ -1366,44 +1397,53 @@ a {
     box-shadow: var(--shadow-custom);
 }
 
-.badge-new {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-400));
-    color: var(--white);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 16px rgba(61, 110, 66, 0.3);
-}
-
+/* ----- Badge ----- */
+.badge-new,
 .badge-best {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: #f59e0b;
-    color: var(--white);
     font-size: 0.6875rem;
     font-weight: 700;
     padding: 6px 12px;
     border-radius: var(--radius-full);
+    z-index: 2;
+    letter-spacing: 0.5px;
+}
+
+.badge-new {
+    background: linear-gradient(135deg, var(--brand-500), var(--brand-400));
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(61, 110, 66, 0.3);
+}
+
+.badge-best {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: var(--white);
     box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
 }
 
+/* ----- Gambar Produk ----- */
 .produk-image {
     width: 100%;
     height: 176px;
     object-fit: cover;
     border-radius: 16px;
     margin-bottom: 16px;
+    transition: transform 0.4s ease;
 }
 
+.produk-card:hover .produk-image {
+    transform: scale(1.02);
+}
+
+/* ----- Nama & Deskripsi ----- */
 .produk-name {
     font-size: 1.125rem;
     font-weight: 800;
     color: var(--stone-900);
+    margin-bottom: 4px;
+    line-height: 1.3;
 }
 
 .produk-desc {
@@ -1411,22 +1451,22 @@ a {
     color: var(--stone-500);
     margin-top: 4px;
     flex: 1;
-    /* Dorong footer ke bawah */
+    line-height: 1.5;
 }
 
+/* ----- Footer Card ----- */
 .produk-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Harga di kiri, tombol di kanan */
     margin-top: 16px;
     padding-top: 16px;
     border-top: 1px solid var(--stone-100);
     margin-top: auto;
-    /* Pastikan di bawah */
     width: 100%;
 }
 
+/* ----- Harga ----- */
 .produk-price-wrapper {
     display: flex;
     align-items: flex-start;
@@ -1440,16 +1480,22 @@ a {
     margin-bottom: -3px;
 }
 
-.produk-unit {
-    font-size: 0.875rem;
-    color: var(--stone-400);
+.produk-price::before {
+    content: 'Rp ';
+    font-weight: 600;
 }
 
+.produk-unit {
+    font-size: 0.75rem;
+    color: var(--stone-400);
+    font-weight: 500;
+}
+
+/* ----- Tombol Aksi ----- */
 .produk-actions {
     display: flex;
     gap: 10px;
     flex-shrink: 0;
-    /* Tombol tidak mengecil */
 }
 
 .btn-shopee,
@@ -1487,28 +1533,191 @@ a {
     display: block;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ========================================
+   COMING SOON - SOFT GRAY STYLE
+   ======================================== */
+
+/* ----- Card Coming Soon Abu-abu ----- */
+.produk-coming-soon {
+    background: #e8e8e8 !important;
+    border-color: #d0d0d0 !important;
+    cursor: default !important;
+    opacity: 0.85 !important;
+    position: relative;
+}
+
+.produk-coming-soon:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.85 !important;
+}
+
+/* ----- Wrapper Gambar ----- */
+.produk-image-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.produk-image-wrapper .produk-image {
+    margin-bottom: 0;
+    display: block;
+    filter: grayscale(0.6) brightness(0.7);
+    transition: filter 0.3s ease;
+}
+
+/* ----- Overlay Coming Soon (Transparan di atas gambar) ----- */
+.coming-soon-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    transition: all 0.3s ease;
+    border-radius: 16px;
+}
+
+/* Teks Coming Soon */
+.coming-soon-text {
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 0 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow:
+        0 0 30px rgba(245, 158, 11, 0.3),
+        inset 0 0 30px rgba(245, 158, 11, 0.1);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    animation: pulse-coming-soft 2s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes pulse-coming-soft {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 50px rgba(245, 158, 11, 0.5);
+    }
+}
+
+/* ----- Teks & Elemen Menjadi Redup ----- */
+.produk-name-dim {
+    color: #7a7a7a !important;
+    filter: blur(0.3px);
+}
+
+.produk-desc-dim {
+    color: #999999 !important;
+    filter: blur(0.3px);
+}
+
+.produk-price-dim {
+    color: #7a7a7a !important;
+    filter: blur(0.3px);
+}
+
+.produk-unit-dim {
+    color: #aaaaaa !important;
+    filter: blur(0.3px);
+}
+
+/* ----- Footer & Border ----- */
+.produk-coming-soon .produk-footer {
+    border-top-color: #d0d0d0 !important;
+}
+
+/* ----- Tombol Disabled (Redup) ----- */
+.produk-coming-soon .btn-shopee,
+.produk-coming-soon .btn-tiktok {
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    filter: grayscale(1) brightness(0.8) !important;
+}
+
+.produk-coming-soon .btn-shopee:hover,
+.produk-coming-soon .btn-tiktok:hover {
+    transform: none !important;
+    opacity: 0.3 !important;
+}
+
+/* ----- Badge Tetap Terlihat ----- */
+.produk-coming-soon .badge-best {
+    z-index: 10;
+}
+
+/* ----- Hover Effect pada Overlay ----- */
+.produk-coming-soon:hover .coming-soon-overlay {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.produk-coming-soon:hover .coming-soon-text {
+    animation-duration: 1.2s;
+}
+
+.produk-coming-soon:hover .produk-image {
+    filter: grayscale(0.5) brightness(0.65);
+}
+
+/* ========================================
+   RESPONSIVE COMING SOON
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .coming-soon-text {
+        font-size: 1.5rem;
+        padding: 8px 24px;
+        letter-spacing: 2px;
+    }
+
+    .produk-coming-soon {
+        opacity: 0.8 !important;
+    }
+}
+
+/* Mobile */
 @media (max-width: 480px) {
-    .section-produk {
-        padding: 56px 0;
+    .coming-soon-text {
+        font-size: 1.25rem;
+        padding: 6px 18px;
+        letter-spacing: 1.5px;
     }
 
-    .section-title {
-        font-size: 2rem;
+    .produk-coming-soon {
+        opacity: 0.75 !important;
     }
 
-    .produk-card {
-        padding: 16px;
+    .produk-coming-soon .produk-image {
+        filter: grayscale(0.5) brightness(0.75);
     }
 
-    .produk-image {
-        height: 140px;
+    .coming-soon-overlay {
+        background: rgba(0, 0, 0, 0.25);
     }
+}
 
-    .btn-shopee,
-    .btn-tiktok {
-        width: 32px;
-        height: 32px;
+/* Very Small */
+@media (max-width: 360px) {
+    .coming-soon-text {
+        font-size: 1rem;
+        padding: 5px 14px;
+        letter-spacing: 1px;
     }
 }
 
