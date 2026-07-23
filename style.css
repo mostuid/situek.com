@@ -146,7 +146,7 @@ a {
 }
 
 .navbar:not(.scrolled) .navbar-logo img {
-    filter: brightness(0) saturate(1);
+    filter: none;
 }
 
 .navbar.scrolled .navbar-logo img {
